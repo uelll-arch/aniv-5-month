@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For You, My Love ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- =========================
+         BACKGROUND
+    ========================== -->
+
+    <div class="stars"></div>
+    <div class="floating-hearts"></div>
+
+
+    <!-- =========================
+     MUSIC
+========================= -->
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="niki.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-player" id="musicPlayer">
+
+    <div class="music-info">
+        <span class="music-note">♫</span>
+
+        <div>
+            <strong>Every Summertime</strong>
+            <small>NIKI · our little soundtrack</small>
+        </div>
+    </div>
+
+    <button
+        id="musicButton"
+        class="music-button"
+        type="button"
+        aria-label="Play music"
+    >
+        ▶
+    </button>
+
+</div>
+
+
+    <!-- =========================
+         LOCK SCREEN
+    ========================== -->
+
+    <section id="lockScreen" class="lock-screen">
+
+        <div class="lock-content">
+
+            <div class="lock-heart">
+                ♥
+            </div>
+
+            <p class="eyebrow">
+                A secret place for you
+            </p>
+
+            <h1>
+                Five Months
+            </h1>
+
+            <p class="lock-description">
+                Some things are meant to be opened
+                by the right person.
+            </p>
+
+            <div class="pin-box">
+
+                <input
+                    type="password"
+                    id="pinInput"
+                    maxlength="6"
+                    inputmode="numeric"
+                    placeholder="••••••"
+                >
+
+                <button id="unlockButton">
+                    Unlock my heart
+                    <span>♡</span>
+                </button>
+
+            </div>
+
+            <p id="errorMessage" class="error-message">
+                That's not our date... try again ❤️
+            </p>
+
+            <p class="pin-hint">
+                hint: the date where our story began
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN WEBSITE
+    ========================== -->
+
+    <main id="mainContent" class="hidden">
+
+
+        <!-- =========================
+             HERO
+        ========================== -->
+
+        <section class="hero">
+
+            <div class="hero-glow"></div>
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    August 29, 2026
+                </p>
+
+                <h1>
+                    Five Months
+                    <span>with you.</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    And somehow, I still get butterflies
+                    every time I see your name.
+                </p>
+
+                <div class="scroll-indicator">
+                    <span>scroll slowly</span>
+                    <div></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INTRO
+        ========================== -->
+
+        <section class="intro section">
+
+            <p class="section-number">
+                01 — US
+            </p>
+
+            <div class="intro-text">
+
+                <h2>
+                    Maybe we're just
+                    <em>pixels</em> apart...
+                </h2>
+
+                <p>
+                    ...but somehow, you became one of the
+                    most real parts of my life.
+                </p>
+
+                <p>
+                    Kita mungkin nggak punya foto berdua
+                    bareng di tempat yang sama,
+                    ataupun photobooth kayak orang-orang.
+                </p>
+
+                <p class="special">
+                    Tapi kita punya cerita.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PHOTO / MEMORY
+        ========================== -->
+
+        <section class="memory section">
+
+            <p class="section-number">
+                02 — MEMORIES
+            </p>
+
+            <h2>
+                Little pieces<br>
+                of <em>us.</em>
+            </h2>
+
+            <div class="photo-grid">
+
+                <div class="photo-card large">
+
+                    <!-- GANTI FOTO -->
+                    <img
+                        src="fiks4.jpeg"
+                        alt="Memory"
+                    >
+
+                    <div class="photo-caption">
+                        <span>01</span>
+                        first time discord
+                    </div>
+
+                </div>
+
+                <div class="photo-card">
+
+                    <!-- GANTI FOTO -->
+                    <img
+                        src="foto fiks1.jpeg"
+                        alt="Memory"
+                    >
+
+                    <div class="photo-caption">
+                        <span>02</span>
+                        discord lagi
+                    </div>
+
+                </div>
+
+                <div class="photo-card">
+
+                    <!-- GANTI FOTO -->
+                    <img
+                        src="fiks5.jpeg"
+                        alt="Memory"
+                    >
+
+                    <div class="photo-caption">
+                        <span>03</span>
+                        discord lagi bwahaha
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="photo-note">
+                
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             TIMELINE
+        ========================== -->
+
+        <section class="timeline section">
+
+            <p class="section-number">
+                03 — OUR JOURNEY
+            </p>
+
+            <h2>
+                Five months.<br>
+                <em>Five little chapters.</em>
+            </h2>
+
+
+            <div class="timeline-list">
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-month">
+                        01
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <span>
+                            Chapter ONE
+                        </span>
+
+                        <h3>
+                           How It All Started
+                        </h3>
+
+                        <p>
+                            Jujur, waktu pertama kali cerita kita dimulai, 
+                            aku nggak pernah nyangka bakal bisa sejauh
+                            ini sama kamu. Tapi dari semua hal yang terjadi 
+                            di hidup aku, nemuin kamu dan mulainya 
+                            cerita kita adalah salah satu keputusan terbaik yang pernah aku buat.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-month">
+                        02
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <span>
+                            CHAPTER TWO
+                        </span>
+
+                        <h3>
+                           The Little Things
+                        </h3>
+
+                        <p>
+                            Nggak melulu soal hal-hal besar, yang bikin
+                            aku makin nyaman justru little pieces of us. 
+                            Becandaan random kita, chat-chat nggak penting,
+                            sampai hal-hal kecil yang cuma kita berdua yang paham. 
+                            Those small moments mean everything to me.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-month">
+                        03
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <span>
+                            CHAPTER THREE
+                        </span>
+
+                        <h3>
+                            Growing Together
+                        </h3>
+
+                        <p>
+                           5 bulan jelas bukan waktu yang singkat buat 
+                           makin saling mengenal. Kita pasti ada beda 
+                           pendapatnya, tapi aku bersyukur karena setiap 
+                           kali ada masalah, kita selalu nemuin cara buat 
+                           balik bareng-bareng lagi dan jadi lebih 
+                           dewasa.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-month">
+                        04
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <span>
+                           CHAPTER FOUR
+                        </span>
+
+                        <h3>
+                            Why You?
+                        </h3>
+
+                        <p>
+                           Kalau ditanya kenapa aku sayang banget 
+                           sama kamu, jawabannya simpel: karena kamu 
+                           jadi diri kamu sendiri. Terima kasih ya udah 
+                           selalu sabar, udah mau dengerin cerita aku, 
+                           dan selalu ada buat bikin hari-hari aku terasa 
+                           lebih bahagia.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item active">
+
+                    <div class="timeline-month">
+                        05
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <span>
+                           CHAPTER FIVE
+                        </span>
+
+                        <h3>
+                           To Many More Months
+                        </h3>
+
+                        <p>
+                            Happy 5th Month Anniversary! Terima kasih 
+                            buat 5 bulan yang penuh kasih sayang ini. Ini baru 5 bab 
+                            pertama dari buku cerita kita, dan aku udah 
+                            nggak sabar buat nulis ribuan bab berikutnya 
+                            bareng kamu xixixi
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             LETTER
+        ========================== -->
+
+        <section class="letter-section section">
+
+            <p class="section-number">
+                04 — A LETTER
+            </p>
+
+            <div class="letter-paper">
+
+                <div class="paper-top">
+                    <span>FOR Syakila 🦋.</span>
+                    <span>29 · 08 · 2026</span>
+                </div>
+
+                <h2>
+                    Dear, my favorite person.
+                </h2>
+
+                <div class="letter-text">
+
+                    <!-- =====================
+                         GANTI SURAT LO DI SINI
+                    ====================== -->
+
+                    <p>
+                        aloooo sayangggggkuuuuu, cintakuuuu, duniakuuuu, manisssskuuuuu 🥹❤️
+                    </p>
+
+                    <p>
+                        Kalau dipikir-pikir, lima bulan itu
+                        mungkin terdengar sederhana. Tapi
+                        buat aku, lima bulan terakhir punya
+                        banyak banget hal yang berarti.
+                    </p>
+
+                    <p>
+                        Terima kasih karena sudah hadir
+                        di hidup aku. Terima kasih untuk
+                        semua chat random, semua cerita,
+                        semua candaan, semua perhatian
+                        kecil yang mungkin menurut kamu
+                        biasa aja.
+                    </p>
+
+                    <p>
+                        Aku suka bagaimana seseorang yang
+                        awalnya cuma ada di balik layar
+                        bisa perlahan menjadi seseorang
+                        yang aku tunggu-tunggu setiap hari.
+                    </p>
+
+                    <p>
+                        Kita memang punya jarak.
+                        Kita mungkin nggak bisa selalu
+                        berada di tempat yang sama.
+                    </p>
+
+                    <p class="quote">
+                        "But distance has never made
+                        you feel far from my heart."
+                    </p>
+
+                    <p>
+                        Aku nggak tahu berapa banyak
+                        bulan yang akan kita lewati
+                        setelah ini.
+                    </p>
+
+                    <p>
+                        Tapi kalau aku boleh berharap,
+                        aku ingin masih melihat nama kamu
+                        di cerita-cerita aku yang berikutnya.
+                    </p>
+
+                    <p>
+                        i love youuuuu sayangggggkuuuuu, cintakuuuu, duniakuuuu, rumahhkuu, kesayangankuuuu 😾🫵🏻
+                        jangan bosen sama akuuu yaaaaaa, karnaaa akuuu masihh mauuu sama kamuuu teyusss chihihihi
+                    </p>
+
+                    <p>
+                        Happy 5 months, sayang.
+                    </p>
+
+                    <p>
+                        sayanggg kamuuu banyaaakkk bangett bangett bangett 💗💗💗
+                        Sehat selalu ya sayanggg.
+                    </p>
+
+                    <p class="signature">
+                        yours,<br>
+                        always ♡
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             QUESTION
+        ========================== -->
+
+        <section class="question section">
+
+            <div class="question-heart">
+                ♥
+            </div>
+
+            <p class="eyebrow">
+                One last thing...
+            </p>
+
+            <h2>
+                Will you stay<br>
+                for the next chapter?
+            </h2>
+
+            <button id="yesButton">
+                Of course ♡
+            </button>
+
+            <p id="answer" class="answer hidden">
+                I knew you'd say yes. 🥺❤️
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             ENDING
+        ========================== -->
+
+        <section class="ending">
+
+            <div class="ending-content">
+
+                <p class="eyebrow">
+                    29 · 08 · 2026
+                </p>
+
+                <h2>
+                    Five months down.
+                </h2>
+
+                <h3>
+                    Hopefully,
+                    <em>a lifetime to go.</em>
+                </h3>
+
+                <div class="ending-heart">
+                    ♥
+                </div>
+
+                <p>
+                    Happy anniversary, my love.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
