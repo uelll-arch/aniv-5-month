@@ -139,6 +139,8 @@ function unlockWebsite() {
                 behavior: "smooth"
             });
 
+            initScrollRevealAfterUnlock();
+
         }, 900);
 
 
@@ -146,6 +148,9 @@ function unlockWebsite() {
         // COBA PUTAR MUSIK
         // =====================================
 playMusic();
+
+        // Hati meledak kecil sebagai sambutan
+        createHeartExplosion();
 
 
     } else {
@@ -204,50 +209,6 @@ pinInput.addEventListener("input", function() {
 
 
 // =========================================
-// MUSIC BUTTON
-// =========================================
-
-musicButton.addEventListener("click", function() {
-
-    if (musicPlaying) {
-
-        // MATIKAN MUSIK
-
-        bgMusic.pause();
-
-        musicPlaying = false;
-
-        musicButton.textContent = "♫";
-
-    } else {
-
-        // NYALAKAN MUSIK
-
-        bgMusic.volume = 0.25;
-
-        bgMusic.play()
-            .then(() => {
-
-                musicPlaying = true;
-
-                musicButton.textContent = "Ⅱ";
-
-            })
-            .catch((error) => {
-
-                console.log(
-                    "Musik gagal dimainkan:",
-                    error
-                );
-
-            });
-
-    }
-
-});
-
-
-// =========================================
 // YES BUTTON
 // =========================================
 
@@ -257,9 +218,343 @@ yesButton.addEventListener("click", function() {
 
     yesButton.style.display = "none";
 
-    createHeartExplosion();
+    createHeartCelebration();
 
 });
+
+
+// =========================================
+// AMBIENT FLOATING HEARTS
+// =========================================
+
+const floatingHeartsContainer =
+    document.querySelector(".floating-hearts");
+
+const ambientHearts = [
+    "♥",
+    "♡",
+    "❤"
+];
+
+function spawnAmbientHeart() {
+
+    if (!floatingHeartsContainer) return;
+
+    // Jangan spawn kalau tab lagi disembunyikan
+    if (document.hidden) return;
+
+    const heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    heart.textContent =
+        ambientHearts[
+            Math.floor(Math.random() * ambientHearts.length)
+        ];
+
+    const startX = Math.random() * 100;
+    const size = Math.random() * 14 + 12;
+    const duration = Math.random() * 8 + 9;
+    const drift = (Math.random() - 0.5) * 120;
+
+    heart.style.left = `${startX}vw`;
+    heart.style.fontSize = `${size}px`;
+    heart.style.animationDuration = `${duration}s`;
+    heart.style.setProperty("--drift", `${drift}px`);
+
+    floatingHeartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, duration * 1000 + 200);
+
+}
+
+// Spawn satu heart baru tiap ~1.3 detik
+setInterval(spawnAmbientHeart, 1300);
+
+// Kasih beberapa heart langsung pas load,
+// biar gak nunggu lama pas awal buka web
+for (let i = 0; i < 6; i++) {
+    setTimeout(spawnAmbientHeart, i * 400);
+}
+
+
+// =========================================
+// SCROLL REVEAL
+// =========================================
+
+function setupScrollReveal() {
+
+    const revealTargets = document.querySelectorAll(
+        ".section, .hero-content, .envelope-wrap, " +
+        ".question-heart, .question h2, #yesButton, " +
+        ".photo-card, .timeline-item, .ending-content"
+    );
+
+    if (!revealTargets.length) return;
+
+    revealTargets.forEach((el) => {
+        el.classList.add("reveal-hidden");
+    });
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach((entry) => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        "reveal-visible"
+                    );
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.15,
+            rootMargin: "0px 0px -60px 0px"
+        }
+    );
+
+    revealTargets.forEach((el) => {
+        observer.observe(el);
+    });
+
+}
+
+// Scroll reveal baru aktif setelah lock screen kebuka,
+// supaya section pertama (hero) juga sempat ke-animasi
+// dan gak ketahan langsung visible dari awal.
+function initScrollRevealAfterUnlock() {
+    // beri jeda kecil biar mainContent sempat ke-render dulu
+    setTimeout(setupScrollReveal, 100);
+}
+
+
+// =========================================
+// DAY COUNTER
+// =========================================
+
+// Tanggal mulai cerita kalian (sesuai PIN 29-04-2026).
+// Ganti di sini kalau tanggalnya beda.
+const storyStartDate = new Date(2026, 3, 29);
+
+const dayCounterNumber =
+    document.getElementById("dayCounterNumber");
+
+function updateDayCounter() {
+
+    if (!dayCounterNumber) return;
+
+    const now = new Date();
+
+    const diffMs = now - storyStartDate;
+
+    const diffDays = Math.max(
+        0,
+        Math.floor(diffMs / (1000 * 60 * 60 * 24))
+    );
+
+    dayCounterNumber.textContent = diffDays;
+
+}
+
+updateDayCounter();
+
+// Update tiap ganti hari, gak perlu tiap detik
+setInterval(updateDayCounter, 60 * 60 * 1000);
+
+
+// =========================================
+// ENVELOPE OPEN
+// =========================================
+
+const envelopeWrap = document.getElementById("envelopeWrap");
+const letterPaper = document.getElementById("letterPaper");
+
+if (envelopeWrap && letterPaper) {
+
+    envelopeWrap.addEventListener("click", function() {
+
+        if (envelopeWrap.classList.contains("opened")) {
+            return;
+        }
+
+        envelopeWrap.classList.add("opened");
+
+        setTimeout(() => {
+
+            letterPaper.classList.remove("letter-hidden");
+            letterPaper.classList.add("letter-visible");
+
+            letterPaper.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }, 550);
+
+    });
+
+}
+
+
+// =========================================
+// PHOTO HEART POP (double click / double tap)
+// =========================================
+
+function popHeartOnPhoto(card) {
+
+    const pop = document.createElement("div");
+
+    pop.className = "photo-pop-heart";
+    pop.textContent = "♥";
+
+    card.appendChild(pop);
+
+    setTimeout(() => {
+        pop.remove();
+    }, 900);
+
+}
+
+document.querySelectorAll(".photo-card").forEach((card) => {
+
+    // Desktop: double click
+    card.addEventListener("dblclick", () => {
+        popHeartOnPhoto(card);
+    });
+
+    // Mobile: double tap
+    let lastTap = 0;
+
+    card.addEventListener("touchend", () => {
+
+        const now = Date.now();
+
+        if (now - lastTap < 320) {
+            popHeartOnPhoto(card);
+        }
+
+        lastTap = now;
+
+    });
+
+});
+
+
+// =========================================
+// HEART CELEBRATION (fills the whole screen)
+// =========================================
+
+function spawnCelebrationHeart() {
+
+    const hearts = [
+        "♥",
+        "♡",
+        "❤",
+        "💕",
+        "💗",
+        "💖"
+    ];
+
+    const heart = document.createElement("div");
+
+    heart.textContent =
+        hearts[
+            Math.floor(Math.random() * hearts.length)
+        ];
+
+    const startX = Math.random() * 100;
+    const startY = 40 + Math.random() * 40;
+
+    const size = Math.random() * 26 + 18;
+    const duration = Math.random() * 1400 + 1400;
+
+    const driftX = (Math.random() - 0.5) * 260;
+    const riseY = -(Math.random() * 60 + 55);
+
+    heart.style.position = "fixed";
+    heart.style.left = `${startX}vw`;
+    heart.style.top = `${startY}vh`;
+    heart.style.fontSize = `${size}px`;
+    heart.style.color =
+        Math.random() > 0.5 ? "#ff668f" : "#ff9db4";
+    heart.style.pointerEvents = "none";
+    heart.style.zIndex = "999";
+    heart.style.textShadow =
+        "0 0 18px rgba(255, 90, 140, 0.5)";
+
+    document.body.appendChild(heart);
+
+    heart.animate(
+
+        [
+            {
+                transform:
+                    "translate(-50%, -50%) scale(0)",
+                opacity: 0
+            },
+            {
+                transform:
+                    "translate(-50%, -50%) scale(1)",
+                opacity: 1,
+                offset: 0.15
+            },
+            {
+                transform:
+                    `translate(
+                        calc(-50% + ${driftX}px),
+                        calc(-50% + ${riseY}vh)
+                    )
+                    scale(1.1)`,
+                opacity: 0
+            }
+        ],
+
+        {
+            duration: duration,
+            easing: "cubic-bezier(.2,.8,.2,1)"
+        }
+
+    );
+
+    setTimeout(() => {
+        heart.remove();
+    }, duration + 200);
+
+}
+
+function createHeartCelebration() {
+
+    // Beberapa gelombang biar hati kerasa
+    // terus "turun/naik" memenuhi layar,
+    // bukan cuma satu ledakan sesaat.
+    const waves = 5;
+    const heartsPerWave = 22;
+
+    for (let w = 0; w < waves; w++) {
+
+        setTimeout(() => {
+
+            for (let i = 0; i < heartsPerWave; i++) {
+                setTimeout(
+                    spawnCelebrationHeart,
+                    i * 25
+                );
+            }
+
+        }, w * 260);
+
+    }
+
+}
 
 
 // =========================================
